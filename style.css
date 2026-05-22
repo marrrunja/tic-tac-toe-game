@@ -4,7 +4,7 @@ body{
     height: 100vh;
     justify-content: center;
     align-items: center;
-   font-family: 'Fredoka One', sans-serif;
+   font-family: 'Fredoka One', 'consolas',sans-serif;
 }
 .skor{
     margin-bottom: 20px;
@@ -56,9 +56,60 @@ button{
     background-color: #57606f;
     color: white;
     border-radius: 8px;
-    margin:0;
+    margin-top:10px;
     border:none;
     font-weight: bold;
     cursor:pointer;
-    display: none;
+    /*display: none;*/
+}
+
+
+.modal {
+  display: none;
+  /*display: flex;*/
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 9999;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
+  animation-name: muncul;
+  animation-duration:.8s;
+  animation-fill-mode: forwards;
+}
+
+.modal-content{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap:wrap;
+    width: 400px;
+    padding-bottom:25px;
+    border-radius: 10px;
+}
+
+
+@keyframes muncul {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    /* scale: (1); */
+    opacity: 1;
+  }
+}
+@media(max-width: 600px)
+{
+    .modal{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    #pesan{
+        font-size: 1.5rem !important;
+    }
 }

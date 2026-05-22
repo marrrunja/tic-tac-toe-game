@@ -9,6 +9,8 @@ const matriksBoard = [
 const container = document.querySelector(".container");
 const pesan = document.getElementById("pesan");
 const button = document.getElementsByTagName("button")[0];
+const modal = document.querySelector(".modal");
+console.log(modal);
 const skor1 = document.getElementById("skor1");
 const skor2 = document.getElementById("skor2");
 
@@ -57,7 +59,7 @@ function handleClickButton() {
     pilihanPlayer = [];
     isRunning = true;
     pesan.innerText = "";
-    button.style.display = "none";
+    modal.style.display="none";
 }
 
 function initalizeSkor(skorX, skorO) {
@@ -81,15 +83,17 @@ function drawGame() {
 
                 pilihanPlayer.push(`${i}${j}`);
 
+                console.log(pilihanPlayer);
+
                 // setelah player jalan, check siapa yang menang
                 if (checkWinner(matriksBoard, player, computer)) {
-                    button.style.display = "block";
+                    modal.style.display="flex";
                     isRunning = false;
                     return;
                 }
                 if (checkSeri(matriksBoard, player, computer)) {
                     pesan.innerText = "Seri, main lagi yaaa😊";
-                    button.style.display = "block";
+                    modal.style.display ="flex";
                     changeBackgroundColorIfTied();
                     isRunning = false;
                     return;
@@ -99,13 +103,13 @@ function drawGame() {
 
                 // setelah komputer jalan, check lgi
                 if (checkWinner(matriksBoard, player, computer)) {
-                    button.style.display = "block";
+                    modal.style.display ="flex";
                     isRunning = false;
                     return;
                 }
                 if (checkSeri(matriksBoard, player, computer)) {
                     pesan.innerText = "Seri, main lagi yaaa😊";
-                    button.style.display = "block";
+                    modal.style.display ="flex";
                     changeBackgroundColorIfTied();
                     isRunning = false;
                     return;
@@ -152,6 +156,17 @@ function gantiWarnaElement(index1, index2, index3, winner) {
 }
 
 
+function checkWinner2(matriksBoard, player, computer){
+    let array_win = [];
+    for(let i = 0; i < matriksBoard.length; i++){
+        for(let j = 0; j < matriksBoard[i].length; j++){
+            array_win.push(matriksBoard[i][j]);
+        }
+        
+    }
+}
+
+// masih bisa diperbarui dan diganti algoritmanya
 function checkWinner(matriksBoard, player, computer) {
     const horizontal1 = (matriksBoard[0][0] != null) && (matriksBoard[0][0] === matriksBoard[0][1]) && (matriksBoard[0][1] === matriksBoard[0][2]);
     const horizontal2 = (matriksBoard[1][0] != null) && (matriksBoard[1][0] === matriksBoard[1][1]) && (matriksBoard[1][1] === matriksBoard[1][2]);
@@ -268,6 +283,7 @@ function checkWinner(matriksBoard, player, computer) {
     }
     return false;
 }
+
 
 function checkSeri(matriksBoard, player, computer) {
     return pilihanPlayer.length === 9 && !checkWinner(matriksBoard, player, computer);
